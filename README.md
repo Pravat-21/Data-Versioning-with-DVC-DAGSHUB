@@ -81,10 +81,25 @@
         git status
         ```
         It must show that data.dvc has been modified along with other updated files & folders.
-        
+
         ```
-        git status
+        git add .
+        git commit -m "your commit for second version of code"
+        git push
         ```
+        Now push the data into remote location.
+        ```
+        dvc push -r origin
+        ```
+**Second version of the code & data has been successfully tracked.**
+
+---------------------------------------------------------------------------------------------------------------
+## **Now it's the time to check**
+- Suppose we want to go the previous version of the project. To do that --
+    -   ```
+        git log --oneline
+        ```
+        It will show all the commits.
 
 
 
