@@ -1,11 +1,11 @@
 # **Step-by-step process of versioning data with DVC & DagsHub:**
 
 - **step-1:**
-    - Suppose we want to do a project. so I assume that we create all the necessary folders & files with help of coockiecutter template and of course created a virtual environment (although it is not mandetory but it's a good practice to do.)
+    - Suppose we want to do a project. so I assume that we create all the necessary folders & files with help of `coockiecutter` template and of course created a virtual environment (although it is not mandetory but it's a good practice to do.)
     - Now assume that we are in that project folder with in virtual environment.
 
 - **step-2:**
-    - Do a inital commit after initialized with git & DVC.(assuming that dvc is already installed & git it configured.)
+    - Do a inital commit after initialized with `GIT` & `DVC`.(assuming that dvc is already installed & git it configured.)
     - If DVC is not installed then-
         ```
         pip install dvc
@@ -17,14 +17,10 @@
         ```
         dvc init
         ```
-    - then tracked those file with DVC which we want to (here only data folder will be tracked)
-        ```
-        dvc add data/
-        ```
     - then do the following--
         ```
         git add .
-        git commit -m "your commit"
+        git commit -m "your inital commit"
         git branch -M main
         git remote add origin <your git repo address>
         git push -u origin main
@@ -40,31 +36,40 @@
     - **STEPS FOR DOING THE DATA VERSIONING IN DAGSHUB:** 
         - First create a accout in `DagsHub` using `GitHub` (we have a choice with `Google` also but here we login with `GitHub` for our benifits.)
 
-        - Connect with your project repo with `DagsHub` (for details how to do that click here)
+        - Connect with your project repo with `DagsHub`
 
          - (if `dvc[dagshub]` is not installed then first install it)
             ```
             pip install dvc[dagshub]
             ```
 
-        - Next setup your `DVC` with lthe remote location of `DagsHub` (for details how to do that click here)
+        - Next setup your `DVC` with the remote location of `DagsHub`.
+            - Go to the remote in the `DagsHub` repo then in DVC section where protocal is being set to `HTTP`.
+            - Then copy the following command into our project terminal
+                ```
+                dvc remote add -d origin https://dagshub.com/<user_name>/<repo_name>.dvc
+                dvc remote modify origin --local auth basic
+                dvc remote modify origin --local user <user_name>
+                dvc remote modify origin --local password your_token 232323.........
+                ```
+
         - After connecting with `DagsHub`check about DVC --
             ```
             dvc status
             ```
+        - then tracked those file with DVC which we want to (here only data folder will be tracked)
             ```
-            dvc commit
+            dvc add data/
             ```
         - After dvc commit we can push all the files to git & data to our remote location
             
             ```
             git add .
             git commit -m "your commit 2"
+            dvc push 
             git push
             ```
-            ```
-            dvc push -r origin
-            ```
+            
 **First version of the code & data has been successfully tracked.**
 
 ---------------------------------------------------------------------------------------------------------------
@@ -75,7 +80,7 @@
     - Now we need again do code & data versioning in the same manner
         ```
         dvc status
-        dvc commit
+        dvc add data/
         ```
         ```
         git status
@@ -85,11 +90,8 @@
         ```
         git add .
         git commit -m "your commit for second version of code"
+        dvc push
         git push
-        ```
-        Now push the data into remote location.
-        ```
-        dvc push -r origin
         ```
 **Second version of the code & data has been successfully tracked.**
 
@@ -108,6 +110,25 @@
     ```
     dvc checkout
     ```
+## **Alternative way to connect our project with remote location in `DagsHub` using `S3`:**
+- when we connect with our `GitHub` & `DagsHub` then -
+    - Go to the remote in the `DagsHub` repo then in DVC section where protocal is being set to `s3`.
+    - Then copy the following command into our project terminal (make sure that `dvc-s3` is already installed if not execute run this) -
+        ```
+        pip install dvc-s3
+        ```
+        then we can run the following -
+        ```
+        dvc remote add origin -d s3://dvc
+        dvc remote modify origin endpointurl https://dagshub.com/<user_name>/<repo_name>.s3
+
+        dvc remote modify origin --local access_key_id your_token
+        dvc remote modify origin --local secret_access_key your_token
+        ```
+    and thus also we can add our remote location into `DagsHub-s3`.
+
+**[ Note that whatever ways we choose during versioning, we need to execute that respective credential during pulling then run `dvc pull` ]**
+
 
 ## **And that's how we can do the data versioning with `DVC`& `DagsHub`.**
 
