@@ -55,6 +55,40 @@
             -   ```
                 dvc commit
                 ```
+        - After dvc commit we can push all the files to git & data to our remote location
+            
+            -   ```
+                git add .
+                git commit -m "your commit 2"
+                git push
+                ```
+            -   ```
+                dvc push -r origin
+                ```
+**First version of the code & data has been successfully tracked.**
+
+---------------------------------------------------------------------------------------------------------------
+### Creating the second version of the code & data:
+- **step-3:**
+    - write your second version of code.
+    - Test it again.
+    - Now we need again do code & data versioning in the same manner
+    -   ```
+        dvc status
+        dvc commit
+        ```
+        ```
+        git status
+        ```
+        It must show that data.dvc has been modified along with other updated files & folders.
+        
+        ```
+        git status
+        ```
+
+
+
+
        
 
 
