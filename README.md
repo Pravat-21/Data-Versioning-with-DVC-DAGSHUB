@@ -21,6 +21,43 @@
         -   ```
             dvc add data/
             ```
+    - then do the following--
+        -   ```
+            git add .
+            git commit -m "your commit"
+            git branch -M main
+            git remote add origin <your git repo address>
+            git push -u origin main
+            ```
+- **step-3:**
+    - Write your code & test it by using-
+        -   ```
+            python yourfile_name.py
+            ```
+    - Here in first version of code I have droped `state_province`,`country`; these two columns.
+    - Now it's time to add remote location for data versioning.
+
+    - **STEPS FOR DOING THE DATA VERSIONING IN DAGSHUB:** 
+        - First create a accout in `DagsHub` using `GitHub` (we have a choice with `Google` also but here we login with `GitHub` for our benifits.)
+
+        - Connect with your project repo with `DagsHub` (for details how to do that click here)
+
+         - (if `dvc[dagshub]` is not installed then first install it)
+            -   ```
+                pip install dvc[dagshub]
+                ```
+
+        - Next setup your `DVC` with lthe remote location of `DagsHub` (for details how to do that click here)
+        -After connecting with `DagsHub`check about DVC --
+            -   ```
+                dvc status
+                ```
+            -   ```
+                dvc commit
+                ```
+       
+
+
     
     
 
