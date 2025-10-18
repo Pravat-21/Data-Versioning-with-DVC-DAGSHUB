@@ -100,6 +100,11 @@
         git log --oneline
         ```
         It will show all the commits.
+- then we can do -
+    ```
+    git checkout <your commit id for that version of codes>
+    ```
+    
 
 
 
