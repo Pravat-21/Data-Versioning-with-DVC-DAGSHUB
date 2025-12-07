@@ -132,6 +132,18 @@
 
 ## **And that's how we can do the data versioning with `DVC`& `DagsHub`.**
 
+### **[Additional Notes about git]:**
+
+- Suppose, we want to checkout any previous commit & then we want to push some changes from it then -
+    ```
+    git checkout main
+
+    git reset --hard aac8f3c8fdf0615c3c4ec8806481f8cd4fb75763
+
+    git push -f
+    ```
+
+
 ___________________________________________________________________________________
 # **Thank You.**
     
